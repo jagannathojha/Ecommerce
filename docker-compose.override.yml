@@ -13,6 +13,16 @@ services:
     ports:
       - "6379:6379" 
 
+  portainer:
+    container_name: portainer
+    restart: always
+    ports:
+      - "8002:8000"
+      - "8012:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+
   catalog.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
