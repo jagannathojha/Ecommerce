@@ -77,7 +77,7 @@ services:
       - ASPNETCORE_HTTP_PORTS=8080
       - ASPNETCORE_HTTPS_PORTS=8081
       - "CacheSettings__ConnectionString=basketdb:6379"
-      - "GrpcSettings__DiscountUrl=http://discount.api:8080" 
+      - "GrpcSettings__DiscountUrl=https://discount.api:8081" 
       - "EventBusSettings__HostAddress=amqp://guest:guest@rabbitmq:5672"
       - "ElasticConfiguration__Uri=http://elasticsearch:9200"
     depends_on:

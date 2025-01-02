@@ -63,7 +63,15 @@ builder.Services.AddScoped<DiscountGrpcService>();
 builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(cfg =>
 {
     cfg.Address = new Uri(builder.Configuration["GrpcSettings:DiscountUrl"]!);
-});
+})
+    .ConfigurePrimaryHttpMessageHandler(() =>
+    {
+        var handler = new HttpClientHandler
+        {
+            ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator,
+        };
+        return handler;
+    });
 
 var app = builder.Build();
 
