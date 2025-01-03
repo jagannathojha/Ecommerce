@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Basket.Application.Responses;
 using Basket.Core.Entities;
-//using EventBus.Messages.Common;
-//using EventBus.Messages.Events;
+using EventBus.Messages.Common;
+using EventBus.Messages.Events;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Basket.Application.Mappers
@@ -13,7 +13,7 @@ namespace Basket.Application.Mappers
         {
             CreateMap<ShoppingCart, ShoppingCartResponse>().ReverseMap();
             CreateMap<ShoppingCartItem, ShoppingCartItemResponse>().ReverseMap();
-            //CreateMap<BasketCheckout, BasketCheckoutEvent>().ReverseMap();
+            CreateMap<BasketCheckout, BasketCheckoutEvent>().ReverseMap();
             //CreateMap<BasketCheckoutV2, BasketCheckoutEventV2>().ReverseMap();
         }
     }

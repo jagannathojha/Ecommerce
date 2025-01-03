@@ -1,12 +1,13 @@
 ﻿using Asp.Versioning;
 using Basket.Application.Commands;
-//using Basket.Application.GrpcService;
+using Basket.Application.GrpcService;
 using Basket.Application.Mappers;
 using Basket.Application.Queries;
 using Basket.Application.Responses;
 using Basket.Core.Entities;
-//using EventBus.Messages.Common;
-//using MassTransit;
+using EventBus.Messages.Common;
+using EventBus.Messages.Events;
+using MassTransit;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -17,15 +18,15 @@ namespace Basket.API.Controllers
     public class BasketController : ApiController
     {
         public readonly IMediator _mediator;
-        //private readonly IPublishEndpoint _publishEndpoint;
+        private readonly IPublishEndpoint _publishEndpoint;
         private readonly ILogger<BasketController> _logger;
 
-        public BasketController(IMediator mediator
-            //, IPublishEndpoint publishEndpoint
-            , ILogger<BasketController> logger)
+        public BasketController(IMediator mediator,
+               IPublishEndpoint publishEndpoint,
+               ILogger<BasketController> logger)
         {
             _mediator = mediator;
-            //_publishEndpoint = publishEndpoint;
+            _publishEndpoint = publishEndpoint;
             _logger = logger;
         }
 
@@ -70,9 +71,9 @@ namespace Basket.API.Controllers
                 return BadRequest();
             }
 
-            //var eventMsg = BasketMapper.Mapper.Map<BasketCheckoutEvent>(basketCheckout);
-            //eventMsg.TotalPrice = basket.TotalPrice;
-            //await _publishEndpoint.Publish(eventMsg);
+            var eventMsg = BasketMapper.Mapper.Map<BasketCheckoutEvent>(basketCheckout);
+            eventMsg.TotalPrice = basket.TotalPrice;
+            await _publishEndpoint.Publish(eventMsg);
             _logger.LogInformation($"Basket Published for {basket.UserName}");
             //remove the basket
             var deleteCmd = new DeleteBasketByUserNameCommand(basketCheckout.UserName);
