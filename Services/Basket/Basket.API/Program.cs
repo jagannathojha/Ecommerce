@@ -1,4 +1,5 @@
 using Asp.Versioning;
+using Basket.API.OpenApi;
 using Basket.Application.GrpcService;
 using Basket.Application.Queries;
 using Basket.Core.Repositories;
@@ -25,6 +26,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.ConfigureOptions<ConfigureSwaggerOptions>();
 
 builder.Services.AddApiVersioning(options =>
 {
