@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs';
 //import { BasketService } from 'src/app/basket/basket.service';
 import { IProduct } from 'src/app/shared/models/product';
-//import { BreadcrumbService } from 'xng-breadcrumb';
+import { BreadcrumbService } from 'xng-breadcrumb';
 import { StoreService } from '../store.service';
 
 @Component({
@@ -18,7 +18,7 @@ export class ProductDetailsComponent implements OnInit {
   constructor(
     private storeService: StoreService,
     private activatedRoute: ActivatedRoute,
-    // private bcService: BreadcrumbService,
+    private bcService: BreadcrumbService,
     // private basketService: BasketService
     ){}
 
@@ -32,7 +32,7 @@ export class ProductDetailsComponent implements OnInit {
       this.storeService.getProductById(id).subscribe({
         next:(response) =>{
           this.product = response;
-          //this.bcService.set('@productDetails', response.name);
+          this.bcService.set('@productDetails', response.name);
           }, error:(error)=>console.log(error)
       });
     }
