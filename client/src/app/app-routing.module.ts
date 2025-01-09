@@ -11,7 +11,7 @@ const routes: Routes = [
   {path: 'un-authenticated', component: UnAuthenticatedComponent},
   {path:'server-error', component: ServerErrorComponent},
   {path: 'store', loadChildren:()=>import('./store/store.module').then(mod=>mod.StoreModule), data:{breadcrumb:'Store'}},
-  // {path: 'basket', loadChildren:()=>import('./basket/basket.module').then(mod=>mod.BasketModule), data:{breadcrumb:'Basket'}},
+  {path: 'basket', loadChildren:()=>import('./basket/basket.module').then(mod=>mod.BasketModule), data:{breadcrumb:'Basket'}},
   // {path: 'checkout', loadChildren:()=>import('./checkout/checkout.module').then(mod=>mod.CheckoutModule), data:{breadcrumb:'Checkout'}},
   {path: '**', redirectTo: '', pathMatch: 'full'},
 ];

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-//import { BasketService } from 'src/app/basket/basket.service';
+import { BasketService } from 'src/app/basket/basket.service';
 import { IProduct } from 'src/app/shared/models/product';
 
 @Component({
@@ -10,9 +10,9 @@ import { IProduct } from 'src/app/shared/models/product';
 export class ProductItemsComponent {
   @Input() product?: IProduct;
 
-  //constructor(private basketService: BasketService){}
+  constructor(private basketService: BasketService){}
 
   addItemToBasket(){
-    //this.product && this.basketService.addItemToBasket(this.product);
+    this.product && this.basketService.addItemToBasket(this.product);
   }
 }
