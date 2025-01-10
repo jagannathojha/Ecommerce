@@ -45,7 +45,7 @@ export class BasketService {
         //'Authorization': token
       })
     };
-    return this.http.post<IBasket>('http://localhost:8011/api/v2/Basket/Checkout', basket, httpOptions).subscribe({
+    return this.http.post<IBasket>(this.baseUrl +'/Basket/CheckoutV2', basket, httpOptions).subscribe({
       next: basket =>{
         this.basketSource.next(null);
         this.router.navigateByUrl('/');
